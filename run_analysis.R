@@ -1,5 +1,11 @@
 run_analysis <- function() 
 {
+    # Checks if packages are installed, if not, installs and loads them
+    if (!require("data.table"))
+        install.packages("data.table")
+    
+    if (!require("reshape2"))
+        install.packages("reshape2")
     require("data.table")
     require("reshape2")
     
@@ -23,7 +29,6 @@ run_analysis <- function()
     
     # Grabs the names of these columns
     mean_std_cols_names <- features[mean_std_cols]
-    
     mean_std_cols_names <- gsub("mean", "Mean", mean_std_cols_names)
     mean_std_cols_names <- gsub("std", "Std", mean_std_cols_names)
     mean_std_cols_names <- gsub("[-()]","",mean_std_cols_names)
@@ -35,7 +40,7 @@ run_analysis <- function()
     # First, creates the training data table
     train_sub <- read.table(file.path(train_dir, "subject_train.txt"))
     train_y <- read.table(file.path(train_dir, "y_train.txt"))
-    train_y[,2] <- activity_names[train_y[,1]]
+    train_y[,2] <- activity_names[train_y[,1]] # replaces the numbers with the correct activity names
     train_y <- train_y[, 2, drop = FALSE]
     train_x <- read.table(file.path(train_dir, "X_train.txt"))[, mean_std_cols]
     train_data <- cbind(train_sub, train_y, train_x)
@@ -48,9 +53,9 @@ run_analysis <- function()
     test_data <- cbind(test_sub, test_y, test_x)
     
     combined <- rbind(train_data, test_data)
-    names(combined) <- c("subject_id", "activity", mean_std_cols_names)
+    names(combined) <- c("subject_id", "activity", mean_std_cols_names) # names the columns
     
-    
+    # Makes factors of the variables to wrap up the summary table
     combined$subject_id <- factor(combined$subject_id)
     combined$activity <- factor(combined$activity)
     

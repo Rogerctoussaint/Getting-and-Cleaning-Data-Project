@@ -8,8 +8,9 @@ You should create one R script called run_analysis.R that does the following.
 4. Appropriately labels the data set with descriptive variable names.
 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each      subject.
 
-## Instructions
-Running the run_analysis.R script will download the necessary data, process it, and output the file tidy_data.txt
+## Files
+run_analysis.R is a R script that runs everything and produces tidy_data.txt
+The codebook contains information about the variables in the data
 
 ## Dependencies
 run_analysis.R uses the packages data.table and reshape2, which the script will download and load automatically.

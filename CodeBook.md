@@ -48,3 +48,9 @@ The following files are available for the train and test data. Their description
 4. Appropriately labels the data set with descriptive variable names.
 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
+## Description of run_analysis Procedure
+- Load data and required packages
+- Load training and testing data separately, then join them together
+- Use column names to only get mean and std variables
+- Make subject id and activity factors, then use them to find the means of each variable for each subject/activity combo. 30 subjects x 6 activities = 180 rows
+- Tidy dataset is output with row names to the file tidy_data.txt
